@@ -1,12 +1,11 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
     <%= link_to "Home", root_path %>
-    <%= link_to "#", '#' %>
+    <%= link_to "Ideas", '/ideas' %>
       <nav>
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "Users", users_path %></li>
           <% if logged_in? %>
-
             <li><%= link_to "Profile", current_user %></li>
             <li><%= link_to "Settings", edit_user_path(current_user) %></li>
             <li class="divider"></li>
@@ -17,7 +16,6 @@
             <% else %>
               <li><%= link_to "Log in", login_path %></li>
             <% end %>
-          </ul>
       </nav>
   </div>
 </header>

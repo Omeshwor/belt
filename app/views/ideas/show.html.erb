@@ -1,0 +1,21 @@
+<div class="container">
+  <%= @idea.user.first_name %> says:
+  <%= @idea.content %>
+</div>
+
+<h1>People who liked the post:</h1>
+<table class="table dark">
+  <thead>
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+    </tr>
+  </thead>
+  <% @idea.users.uniq.each do |user| %>
+<tbody>
+  <td><%= user.first_name %></td>
+  <td><%= user.last_name %></td>
+</tbody>
+
+  <% end %>
+</table>

@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+	has_many :ideas
+	has_many :likes, dependent: :destroy
+	has_many :ideas_liked, through: :likes, source: :idea
   before_save :downcase_email
 
   validates :first_name, presence: true, length: {minimum: 2, maximum: 50}

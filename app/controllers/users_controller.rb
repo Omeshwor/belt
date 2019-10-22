@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, except: [:new, :create, :index]
+  before_action :logged_in_user, except: [:new, :create, :index, :show]
 
   def index
     @users = User.all
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       flash[:notice] = "User successfully created!"
       session[:id] = @user.id
       current_user = @user
-      redirect_to user_path
+      redirect_to user_path(current_user)
     else
       flash[:errors]= @user.errors.full_messages
       redirect_to new_user_path

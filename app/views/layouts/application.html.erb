@@ -20,6 +20,9 @@
           <% end %>
       <% end %>
     </div>
+    <% if logged_in? %>
+      <h4>Welcome <%= current_user.first_name %> !</h4>
+    <% end %>
     <%= yield %>
   </body>
 </html>

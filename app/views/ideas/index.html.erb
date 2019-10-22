@@ -1,0 +1,43 @@
+<div class="col-5">
+  <div class="container">
+    <form class="form-control" action="/ideas" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+      <label for="content">Content</label>
+      <input type="text" name="idea[content]" id="content">
+      <input type="submit" value="IDEA!!!">
+    </form>
+  </div>
+
+  <br>
+  <% @ideas.each do |idea| %>
+    <div class="container">
+    <a href="/users/<%= idea.user.id %>"><%= idea.user.first_name %></a>
+
+      <%= idea.content %>
+    <div class="col-5">
+      <% if not idea.users.include?(current_user) %>
+        <form action='/likes' method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="like[idea_id]" value="<%= idea.id %>">
+          <input type="hidden" name="like[user_id]" value="<%= session[:id] %>">
+          <button type="submit" name="Like" id = "Like">Like</button>
+        </form>
+      <% else %>
+        <form class="form-control" action="/likes/<%= Like.find_by(idea_id: idea.id, user_id: current_user).id %>" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <button type="submit" name="Unlike" id = "Unlike" >Unlike</button>
+      </form>
+      <% end %>
+    <a href="/ideas/<%= idea.id %>"><%= idea.likes.count %> people likes this</a>  
+    </div>
+  </div>
+  <% if idea.user == current_user %>
+    <form class="form-control" action="/idea/<%= idea.id %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+      <input type="submit" name="Delete" value="Delete">
+    </form>
+    <% end %>
+<% end %>
+</div>
