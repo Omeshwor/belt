@@ -1,0 +1,4 @@
+<h1>Showing all Users in the list</h1>
+<% @users.each do |user| %>
+  <li><%= user.first_name %> <%= user.last_name %></li>
+<% end %>
